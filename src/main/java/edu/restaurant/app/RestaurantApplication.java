@@ -7,4 +7,6 @@ public class RestaurantApplication {
         Logger logger = Logger.getLogger("RestaurantApplication");
         logger.info("Starting application");
     }
+
+
 }

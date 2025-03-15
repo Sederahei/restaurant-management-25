@@ -15,7 +15,20 @@ public class IngredientCrudOperations implements CrudOperations<Ingredient> {
 
     @Override
     public List<Ingredient> getAll(int page, int size) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        String sql = "select i.id, i.name from ingredient i";
+
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+            try (ResultSet resultSet = statement.executeQuery()) {
+                List<Ingredient> ingredients = new ArrayList<>();
+                while (resultSet.next()) {
+                    ingredients.add(mapFromResultSet(resultSet));
+                }
+                return ingredients;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e + " Not supported yet. ");
+        }
     }
 
     @Override

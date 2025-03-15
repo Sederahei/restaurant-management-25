@@ -13,7 +13,7 @@ public class DataSource {
     private final String jdbcUrl;
 
     public DataSource() {
-        jdbcUrl = "jdbc:postgresql://" + host + ":" + defaultPort + "/" + database;
+        this.jdbcUrl = String.format("jdbc:postgresql://%s:%d/%s", host, defaultPort, database);
     }
 
     public Connection getConnection() {
@@ -23,4 +23,6 @@ public class DataSource {
             throw new RuntimeException(e);
         }
     }
+
+
 }
